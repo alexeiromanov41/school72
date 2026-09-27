@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расписание 3 «Б» 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --pink:      #ffb3d9;
+    --pink-soft: #ffe3f1;
+    --lav:       #c3b1ff;
+    --lav-soft:  #efe8ff;
+    --mint:      #9fe3c8;
+    --mint-soft: #e3f8f1;
+    --peach:     #ffc6ab;
+    --text:      #5a4a5c;
+    --text-soft: #90829a;
+    --white:     #ffffff;
+    --radius:    22px;
+    --shadow:    0 8px 24px rgba(200,150,200,.16);
+    --shadow-sm: 0 3px 10px rgba(200,150,200,.12);
+  }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Nunito', sans-serif;
+    color:var(--text);
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 8% 0%,  #ffe3f1 0%, transparent 45%),
+      radial-gradient(circle at 95% 8%, #efe8ff 0%, transparent 42%),
+      radial-gradient(circle at 50% 100%, #e3f8f1 0%, transparent 48%),
+      linear-gradient(160deg,#fff8fc,#f7f2ff 60%,#f2fbff);
+    background-attachment:fixed;
+    padding:22px 14px 70px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .container{ max-width:960px; margin:0 auto; }
+
+  /* ---------- HEADER ---------- */
+  .header{
+    text-align:center;
+    padding:16px 18px 22px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(10px);
+    margin-bottom:22px;
+  }
+  .header .emoji{
+    font-size:2rem; display:block; margin-bottom:6px;
+    animation:float 3.5s ease-in-out infinite;
+  }
+  .header .school{
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:clamp(.95rem, 3.6vw, 1.15rem);
+    color:var(--text);
+    line-height:1.4;
+  }
+  .header h1{
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:clamp(1.5rem, 6vw, 2.4rem);
+    line-height:1.15;
+    margin:10px 0 6px;
+    background:linear-gradient(100deg,#ff8fc4,#b89bff 55%,#7fd6b4);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .header .year{
+    color:var(--text-soft);
+    font-size:clamp(.85rem,3.2vw,1rem);
+    font-weight:600;
+  }
+
+  @keyframes float{
+    0%,100%{ transform:translateY(0) rotate(-4deg); }
+    50%    { transform:translateY(-7px) rotate(4deg); }
+  }
+
+  /* ---------- ACCORDION ---------- */
+  .acc{
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(255,255,255,.92);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(10px);
+    overflow:hidden;
+    margin-bottom:14px;
+    position:relative;
+    transition:box-shadow .3s ease;
+  }
+  .acc::before{
+    content:'';
+    position:absolute;
+    left:0; top:0; bottom:0; width:6px;
+    border-radius:0 6px 6px 0;
+    z-index:1;
+  }
+  .acc.color-pink::before  { background:linear-gradient(180deg,#ffa6cf,#ff86bd); }
+  .acc.color-lav::before   { background:linear-gradient(180deg,#bda6ff,#9f86ff); }
+  .acc.color-mint::before  { background:linear-gradient(180deg,#8fdcbe,#6fd0ac); }
+  .acc.color-peach::before { background:linear-gradient(180deg,#ffbb9a,#ff9f77); }
+  .acc.color-blue::before  { background:linear-gradient(180deg,#9fd6ff,#77bffb); }
+
+  .acc.open{
+    box-shadow:0 14px 34px rgba(200,150,200,.28);
+  }
+
+  .acc-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px 18px 16px 22px;
+    cursor:pointer;
+    user-select:none;
+    -webkit-tap-highlight-color:transparent;
+    transition:background .25s ease;
+    background:transparent;
+    border:none;
+    width:100%;
+    text-align:left;
+    font-family:inherit;
+    color:inherit;
+  }
+  .acc-head:hover{ background:rgba(255,255,255,.55); }
+
+  .acc-head .dot{
+    width:10px; height:10px; border-radius:50%;
+    flex:0 0 10px;
+    background:linear-gradient(135deg,#ff8fc4,#b89bff);
+    box-shadow:0 0 0 4px rgba(255,179,217,.25);
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .acc.open .acc-head .dot{ transform:scale(1.2); }
+
+  .acc-head .title{
+    flex:1;
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:clamp(1rem,4.2vw,1.2rem);
+    color:var(--text);
+    line-height:1.3;
+  }
+  .acc-head .title small{
+    display:inline-block;
+    margin-left:8px;
+    font-family:'Nunito', sans-serif;
+    font-weight:700;
+    font-size:.72rem;
+    color:#fff;
+    background:linear-gradient(135deg,#ffa6cf,#bda6ff);
+    padding:3px 9px;
+    border-radius:999px;
+    vertical-align:middle;
+    letter-spacing:.3px;
+  }
+
+  .acc-head .chev{
+    flex:0 0 30px;
+    width:30px; height:30px;
+    display:grid; place-items:center;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--pink-soft),var(--lav-soft));
+    color:#b98fe0;
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .acc-head .chev svg{ width:14px; height:14px; display:block; }
+  .acc.open .acc-head .chev{ transform:rotate(180deg); }
+
+  /* Плавное раскрытие */
+  .acc-body{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .4s cubic-bezier(.4,0,.2,1);
+  }
+  .acc.open .acc-body{ grid-template-rows:1fr; }
+
+  .acc-body-inner{
+    overflow:hidden;
+    min-height:0;
+  }
+
+  .acc-content{
+    padding:0 18px 20px 22px;
+  }
+
+  /* ---------- BELLS ---------- */
+  .bells{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+    gap:11px;
+  }
+  .bell{
+    padding:14px 12px;
+    text-align:center;
+    background:rgba(255,255,255,.85);
+    border:1px solid rgba(255,255,255,.95);
+    border-radius:18px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .bell:hover{ transform:translateY(-3px); box-shadow:var(--shadow); }
+  .bell .bell-num{
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:.78rem;
+    color:#b98fe0;
+    margin-bottom:6px;
+    letter-spacing:.5px;
+  }
+  .bell .bell-time{
+    font-weight:800;
+    font-size:.98rem;
+    color:var(--text);
+    line-height:1.35;
+  }
+
+  /* ---------- LESSONS ---------- */
+  .lessons{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:9px;
+    margin-bottom:6px;
+  }
+  .lesson{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 14px;
+    background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,.95);
+    border-radius:16px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .lesson:hover{ transform:translateX(4px); box-shadow:var(--shadow); }
+  .lesson .num{
+    width:34px; height:34px;
+    flex:0 0 34px;
+    display:grid; place-items:center;
+    border-radius:11px;
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:.92rem;
+    color:#fff;
+    box-shadow:0 5px 12px rgba(200,150,200,.25);
+  }
+  .num.c1{ background:linear-gradient(135deg,#ffa6cf,#ff86bd); }
+  .num.c2{ background:linear-gradient(135deg,#bda6ff,#9f86ff); }
+  .num.c3{ background:linear-gradient(135deg,#8fdcbe,#6fd0ac); }
+  .num.c4{ background:linear-gradient(135deg,#ffbb9a,#ff9f77); }
+  .num.c5{ background:linear-gradient(135deg,#9fd6ff,#77bffb); }
+  .num.c6{ background:linear-gradient(135deg,#ffd18f,#ffb95e); }
+  .num.c7{ background:linear-gradient(135deg,#c9b1ff,#a98cff); }
+
+  .lesson .subject{
+    flex:1;
+    min-width:0;
+    font-weight:700;
+    font-size:clamp(.94rem,3.6vw,1.02rem);
+    color:var(--text);
+    line-height:1.3;
+  }
+
+  .lesson .lesson-time{
+    flex:0 0 auto;
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:clamp(.72rem,2.9vw,.82rem);
+    color:#b98fe0;
+    background:linear-gradient(135deg,#fff0f8,#f0e9ff);
+    padding:5px 11px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.95);
+    white-space:nowrap;
+    letter-spacing:.2px;
+    box-shadow:0 3px 8px rgba(200,150,200,.12);
+  }
+
+  /* ---------- CLUBS ---------- */
+  .clubs{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px dashed rgba(200,150,200,.35);
+  }
+  .club{
+    position:relative;
+    overflow:hidden;
+    padding:13px 16px 13px 20px;
+    background:linear-gradient(135deg, #fff6fb, #f6f1ff);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:16px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .club:hover{ transform:translateY(-3px); box-shadow:var(--shadow); }
+  .club::before{
+    content:'';
+    position:absolute;
+    left:0; top:0; bottom:0; width:5px;
+    background:linear-gradient(180deg,#ffb3d9,#c3b1ff);
+    border-radius:0 5px 5px 0;
+  }
+  .club .club-time{
+    display:inline-block;
+    font-family:'Comfortaa', cursive;
+    font-weight:700;
+    font-size:.84rem;
+    color:#fff;
+    padding:4px 12px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#ffa6cf,#bda6ff);
+    box-shadow:0 4px 10px rgba(190,140,230,.3);
+    margin-bottom:8px;
+  }
+  .club .club-name{
+    font-weight:800;
+    font-size:clamp(.98rem,3.8vw,1.08rem);
+    color:var(--text);
+    line-height:1.3;
+    margin-bottom:6px;
+  }
+  .club .club-teacher{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:.88rem;
+    color:var(--text-soft);
+    font-weight:600;
+    margin-top:3px;
+  }
+  .club .club-teacher a{
+    color:#b98fe0;
+    text-decoration:none;
+    font-weight:700;
+    transition:color .2s ease;
+  }
+  .club .club-teacher a:hover{ color:#ff6fb0; }
+
+  /* ---------- FOOTER ---------- */
+  .footer{
+    text-align:center;
+    margin-top:36px;
+    font-size:.82rem;
+    color:var(--text-soft);
+    font-family:'Comfortaa', cursive;
+  }
+  .footer span{ color:#ff6fb0; }
+
+  /* ---------- DESKTOP ---------- */
+  @media (min-width:600px){
+    body{ padding:30px 24px 80px; }
+    .lessons{ grid-template-columns:1fr 1fr; }
+    .clubs{ grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); }
+    .acc-head{ padding:18px 22px 18px 26px; }
+    .acc-content{ padding:0 22px 24px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <span class="emoji">🌸</span>
+    <div class="school">МБОУ СОШ № 72 г. Брянска</div>
+    <h1>3 «Б» класс</h1>
+    <div class="year">2026 – 2027 учебный год</div>
+  </header>
+
+  <!-- ЗВОНКИ -->
+  <section class="acc color-lav">
+    <button class="acc-head" type="button">
+      <span class="dot"></span>
+      <span class="title">🔔 Расписание звонков</span>
+      <span class="chev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </button>
+    <div class="acc-body">
+      <div class="acc-body-inner">
+        <div class="acc-content">
+          <div class="bells" id="bells"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДНИ НЕДЕЛИ -->
+  <div id="days"></div>
+
+  <div class="footer">сделано с <span>♥</span> специально для тебя</div>
+
+</div>
+
+<script>
+/* ==========================================================
+   ДАННЫЕ
+   ========================================================== */
+
+const bells = [
+  { n:1, time:"08:15 – 08:55" },
+  { n:2, time:"09:05 – 09:45" },
+  { n:3, time:"10:00 – 10:40" },
+  { n:4, time:"10:55 – 11:35" },
+  { n:5, time:"11:50 – 12:30" },
+  { n:6, time:"12:50 – 13:30" },
+  { n:7, time:"13:40 – 14:20" }
+];
+
+const days = [
+  {
+    name:"Понедельник",
+    lessons:[ "Разговоры о важном", "Русский язык", "Математика", "Литература" ],
+    clubs:[
+      { time:"13:00 – 14:00", name:"Сольфеджио",      teacher:"Ольга Александровна", phone:"+7-962-137-62-76" },
+      { time:"14:05 – 14:45", name:"Слушание музыки", teacher:"Ольга Александровна", phone:"+7-962-137-62-76" },
+      { time:"15:00",         name:"Плавание",        teacher:"Елена Борисовна",     phone:"+7-920-840-25-04" }
+    ]
+  },
+  {
+    name:"Вторник",
+    lessons:[ "Русский язык", "Физкультура", "Математика", "Литература", "Окружающий мир" ],
+    clubs:[
+      { time:"14:30 – 15:10", name:"Фортепиано", teacher:"Елена Александровна", phone:"+7-953-286-26-40" }
+    ]
+  },
+  {
+    name:"Среда",
+    lessons:[ "Русский язык", "Английский язык", "Музыка", "Математика", "Литература" ],
+    clubs:[
+      { time:"15:00", name:"Плавание", teacher:"Елена Борисовна", phone:"+7-920-840-25-04" }
+    ]
+  },
+  {
+    name:"Четверг",
+    lessons:[ "Русский язык", "Математика", "Окружающий мир", "Литература", "ИЗО" ],
+    clubs:[
+      { time:"13:30 – 14:10", name:"Хор",        teacher:"Марина Геннадьевна", phone:"+7-953-286-09-33" },
+      { time:"17:00",         name:"Английский", teacher:"Светлана Ивановна",  phone:"+7-906-503-87-33" }
+    ]
+  },
+  {
+    name:"Пятница",
+    lessons:[ "Русский язык", "Английский язык", "Математика", "Физкультура", "Технология" ],
+    clubs:[
+      { time:"14:30 – 15:10", name:"Фортепиано", teacher:"Елена Александровна", phone:"+7-953-286-26-40" }
+    ]
+  }
+];
+
+/* ==========================================================
+   ОТРИСОВКА
+   ========================================================== */
+
+const colors = ['color-pink','color-lav','color-mint','color-peach','color-blue'];
+const chevSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+/* --- Звонки --- */
+document.getElementById('bells').innerHTML = bells.map(b => `
+  <div class="bell">
+    <div class="bell-num">УРОК ${b.n}</div>
+    <div class="bell-time">${b.time}</div>
+  </div>
+`).join('');
+
+/* --- Дни --- */
+const todayIdx = (new Date().getDay() + 6) % 7; // 0 = понедельник
+
+document.getElementById('days').innerHTML = days.map((d, di) => {
+
+  const lessonsHtml = d.lessons.map((s, li) => {
+    const bell = bells[li];
+    const timeHtml = bell ? `<div class="lesson-time">${bell.time}</div>` : '';
+    return `
+      <div class="lesson">
+        <div class="num c${(li % 7) + 1}">${li + 1}</div>
+        <div class="subject">${s}</div>
+        ${timeHtml}
+      </div>`;
+  }).join('');
+
+  const clubsHtml = d.clubs.length ? `
+    <div class="clubs">
+      ${d.clubs.map(c => `
+        <div class="club">
+          <div class="club-time">🕒 ${c.time}</div>
+          <div class="club-name">${c.name}</div>
+          <div class="club-teacher">👩‍🏫 ${c.teacher}</div>
+          <div class="club-teacher">📞 <a href="tel:${c.phone.replace(/[^+\d]/g,'')}">${c.phone}</a></div>
+        </div>
+      `).join('')}
+    </div>` : '';
+
+  const isToday = di === todayIdx;
+
+  return `
+    <section class="acc ${colors[di % colors.length]}">
+      <button class="acc-head" type="button">
+        <span class="dot"></span>
+        <span class="title">
+          ${d.name}
+          ${isToday ? '<small>сегодня</small>' : ''}
+        </span>
+        <span class="chev">${chevSvg}</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <div class="acc-content">
+            <div class="lessons">${lessonsHtml}</div>
+            ${clubsHtml}
+          </div>
+        </div>
+      </div>
+    </section>`;
+}).join('');
+
+/* ==========================================================
+   ЛОГИКА АККОРДЕОНОВ:
+   одновременно открыта может быть только одна группа
+   ========================================================== */
+
+document.querySelectorAll('.acc-head').forEach(head => {
+  head.addEventListener('click', () => {
+    const acc = head.closest('.acc');
+    const wasOpen = acc.classList.contains('open');
+
+    // закрыть все открытые
+    document.querySelectorAll('.acc.open').forEach(el => el.classList.remove('open'));
+
+    // если кликнутая была закрыта — открыть её
+    if (!wasOpen) acc.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
